@@ -95,4 +95,3 @@ module "ecs-cluster" {
   enable_asg_autoscaling      = var.enable_asg_autoscaling
   notify_topic_slack_endpoint = local.notify_topic_slack_endpoint
 }
-
