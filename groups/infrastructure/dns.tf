@@ -1,4 +1,4 @@
-resource "aws_route53_record" "document_api_alb_r53_record" {
+resource "aws_route53_record" "frontend_document_api_alb_r53_record" {
   count   = var.document_api_create_alb && trimspace(var.zone_id) != "" && trimspace(var.internal_top_level_domain) != "" ? 1 : 0
 
   zone_id         = var.zone_id
@@ -16,7 +16,7 @@ resource "aws_route53_record" "document_api_alb_r53_record" {
 }
 
 
-resource "aws_route53_record" "private_document_api_alb_r53_record" {
+resource "aws_route53_record" "backend_document_api_alb_r53_record" {
   count   = var.private_document_api_create_alb && trimspace(var.zone_id) != ""  && trimspace(var.internal_top_level_domain) != "" ? 1 : 0
 
   zone_id         = var.zone_id

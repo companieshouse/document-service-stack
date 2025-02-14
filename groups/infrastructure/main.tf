@@ -17,7 +17,7 @@ provider "aws" {
   region  = var.aws_region
 }
 
-module "document_api_alb" {
+module "frontend_document_api_alb" {
   source                    = "git@github.com:companieshouse/terraform-modules//aws/application_load_balancer?ref=1.0.297"
   count                     = var.document_api_create_alb ? 1 : 0
 
@@ -47,7 +47,7 @@ module "document_api_alb" {
 
 
 
-module "private_document_api_alb" {
+module "backend_document_api_alb" {
   source                  = "git@github.com:companieshouse/terraform-modules//aws/application_load_balancer?ref=1.0.297"
   count                   = var.private_document_api_create_alb ? 1 : 0
 
