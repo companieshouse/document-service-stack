@@ -72,13 +72,13 @@ variable "enable_container_insights" {
   default     = true
 }
 
-variable "document_api_create_alb" {
+variable "frontend_document_api_create_alb" {
   type        = bool
   description = "Override with value false if this ELB is not required in the environment"
   default     = true
 }
 
-variable "private_document_api_create_alb" {
+variable "backend_document_api_create_alb" {
   type        = bool
   description = "Override with value false if this ALB is not required in the environment"
   default     = true

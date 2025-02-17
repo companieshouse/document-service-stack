@@ -19,7 +19,7 @@ provider "aws" {
 
 module "frontend_document_api_alb" {
   source                    = "git@github.com:companieshouse/terraform-modules//aws/application_load_balancer?ref=1.0.297"
-  count                     = var.document_api_create_alb ? 1 : 0
+  count                     = var.frontend_document_api_create_alb ? 1 : 0
 
   environment               = var.environment
   service                   = "document-api"
@@ -49,7 +49,7 @@ module "frontend_document_api_alb" {
 
 module "backend_document_api_alb" {
   source                  = "git@github.com:companieshouse/terraform-modules//aws/application_load_balancer?ref=1.0.297"
-  count                   = var.private_document_api_create_alb ? 1 : 0
+  count                   = var.backend_document_api_create_alb ? 1 : 0
 
   environment             = var.environment
   service                 = "private-document-api"
