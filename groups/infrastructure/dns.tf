@@ -2,7 +2,7 @@ resource "aws_route53_record" "frontend_document_api_alb_r53_record" {
   count   = var.frontend_document_api_create_alb && trimspace(var.zone_id) != "" && trimspace(var.internal_top_level_domain) != "" ? 1 : 0
 
   zone_id         = var.zone_id
-  name            = "document-api${var.internal_top_level_domain}"
+  name            = "frontend-document-api${var.internal_top_level_domain}"
   type            = "A"
   allow_overwrite = true
 
@@ -20,7 +20,7 @@ resource "aws_route53_record" "backend_document_api_alb_r53_record" {
   count   = var.backend_document_api_create_alb && trimspace(var.zone_id) != ""  && trimspace(var.internal_top_level_domain) != "" ? 1 : 0
 
   zone_id         = var.zone_id
-  name            = "private-document-api${var.internal_top_level_domain}"
+  name            = "backend-document-api${var.internal_top_level_domain}"
 
   type            = "A"
   allow_overwrite = true
