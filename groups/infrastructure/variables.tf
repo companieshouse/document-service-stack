@@ -85,12 +85,6 @@ variable "backend_document_api_create_alb" {
 }
 
 # DNS
-variable "zone_id" {
-  type        = string
-  description = "The ID of the hosted zone to contain the Route 53 record."
-  default     = ""
-}
-
 variable "internal_top_level_domain" {
   type        = string
   description = "The type level of the DNS domain for internal access."

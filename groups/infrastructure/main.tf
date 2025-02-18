@@ -26,7 +26,8 @@ module "frontend_document_api_alb" {
   ssl_certificate_arn       = data.aws_acm_certificate.cert.arn
   subnet_ids                = values(local.routing_subnet_ids)
   vpc_id                    = data.aws_vpc.vpc.id
-  route53_domain_name       = var.cert_domain
+  route53_aliases           = ["frontend-document-api"]
+  route53_domain_name       = var.internal_top_level_domain
 
   create_security_group     = true
   internal                  = false
@@ -56,7 +57,8 @@ module "backend_document_api_alb" {
   ssl_certificate_arn     = data.aws_acm_certificate.cert.arn
   subnet_ids              = values(local.routing_subnet_ids)
   vpc_id                  = data.aws_vpc.vpc.id
-  route53_domain_name     = var.cert_domain
+  route53_aliases         = ["backend-document-api"]
+  route53_domain_name     = var.internal_top_level_domain
 
   create_security_group   = true
   internal                = true
