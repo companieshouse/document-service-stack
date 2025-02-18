@@ -2,4 +2,6 @@ environment = "cidev"
 aws_profile = "development-eu-west-2"
 enable_container_insights = true
 cert_domain = "cidev.aws.chdev.org"
-internal_top_level_domain = "aws.chdev.org"
+route53_domain_name = "aws.chdev.org"
+frontend_route53_aliases = ["frontend-document-api"]
+backend_route53_aliases  = ["backend-document-api"]

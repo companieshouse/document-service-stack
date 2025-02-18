@@ -85,7 +85,19 @@ variable "backend_document_api_create_alb" {
 }
 
 # DNS
-variable "internal_top_level_domain" {
+variable "frontend_route53_aliases" {
+  type        = list(string)
+  description = "The Route53 aliases to create."
+  default     = []
+}
+
+variable "backend_route53_aliases" {
+  type        = list(string)
+  description = "The Route53 aliases to create."
+  default     = []
+}
+
+variable "route53_domain_name" {
   type        = string
   description = "The type level of the DNS domain for internal access."
   default     = ""
