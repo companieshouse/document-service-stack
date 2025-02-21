@@ -19,6 +19,7 @@ locals {
   management_private_subnet_cidrs = [for subnet in data.aws_subnet.management : subnet.cidr_block]
   application_cidrs               = [for subnet in data.aws_subnet.private : subnet.cidr_block]
   ingress_cidrs_private           = concat(local.management_private_subnet_cidrs, local.application_cidrs)
+  ingress_cidrs_public            = concat(local.management_private_subnet_cidrs, local.application_cidrs, [ "0.0.0.0/0" ] )
 
   ingress_prefix_list_ids         = [data.aws_ec2_managed_prefix_list.admin.id]
 

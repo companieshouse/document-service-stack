@@ -31,7 +31,7 @@ module "frontend_document_api_alb" {
 
   create_security_group     = true
   internal                  = false
-  ingress_cidrs             = local.ingress_cidrs_private
+  ingress_cidrs             = local.ingress_cidrs_public
   ingress_prefix_list_ids   = local.ingress_prefix_list_ids
   service_configuration = {
     listener_config = {
