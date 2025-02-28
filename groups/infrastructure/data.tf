@@ -68,3 +68,14 @@ data "aws_subnet" "routing_subnets" {
 data "aws_ec2_managed_prefix_list" "admin" {
   name = "administration-cidr-ranges"
 }
+
+data "aws_subnets" "public" {
+  filter {
+    name   = "tag:NetworkType"
+    values = ["public"]
+  }
+  filter {
+    name   = "tag:Name"
+    values = [local.public_subnet_pattern]
+  }
+}
