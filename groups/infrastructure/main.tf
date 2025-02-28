@@ -24,7 +24,7 @@ module "frontend_document_api_alb" {
   environment               = var.environment
   service                   = "frontend-document-api"
   ssl_certificate_arn       = data.aws_acm_certificate.cert.arn
-  subnet_ids                = values(local.routing_subnet_ids)
+  subnet_ids                = local.public_subnet_ids
   vpc_id                    = data.aws_vpc.vpc.id
   route53_aliases           = var.frontend_route53_aliases
   route53_domain_name       = var.route53_domain_name
