@@ -30,7 +30,7 @@ module "frontend_document_api_alb" {
   route53_domain_name       = var.route53_domain_name
 
   create_security_group     = true
-  internal                  = false
+  internal                  = var.frontend_document_api_create_internal_alb
   ingress_cidrs             = local.ingress_cidrs_public
   ingress_prefix_list_ids   = local.ingress_prefix_list_ids
   service_configuration = {
