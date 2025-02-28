@@ -78,6 +78,12 @@ variable "frontend_document_api_create_alb" {
   default     = true
 }
 
+variable "frontend_document_api_create_internal_alb" {
+  type        = bool
+  description = "Override with value false if this ELB is required as internet facing in the environment"
+  default     = true
+}
+
 variable "backend_document_api_create_alb" {
   type        = bool
   description = "Override with value false if this ALB is not required in the environment"
