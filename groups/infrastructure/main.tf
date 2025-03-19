@@ -61,8 +61,8 @@ module "backend_document_api_alb" {
   route53_domain_name     = var.route53_domain_name
 
   create_security_group   = true
-  internal                = true
-  ingress_cidrs           = local.ingress_cidrs_private
+  internal                = var.backend_document_api_create_internal_alb
+  ingress_cidrs           = local.ingress_cidrs_public
   ingress_prefix_list_ids = local.ingress_prefix_list_ids
   service_configuration = {
     listener_config = {

@@ -90,6 +90,12 @@ variable "backend_document_api_create_alb" {
   default     = true
 }
 
+variable "backend_document_api_create_internal_alb" {
+  type        = bool
+  description = "Override with value false if this ELB is required as internet facing in the environment"
+  default     = true
+}
+
 # DNS
 variable "frontend_route53_aliases" {
   type        = list(string)
