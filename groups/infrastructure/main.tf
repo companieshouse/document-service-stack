@@ -24,7 +24,7 @@ module "frontend_document_api_alb" {
   environment               = var.environment
   service                   = "frontend-document-api"
   ssl_certificate_arn       = data.aws_acm_certificate.cert.arn
-  subnet_ids                = local.public_subnet_ids
+  subnet_ids                = local.frontend_lb_subnet_ids
   vpc_id                    = data.aws_vpc.vpc.id
   route53_aliases           = var.frontend_route53_aliases
   route53_domain_name       = var.route53_domain_name
@@ -55,14 +55,14 @@ module "backend_document_api_alb" {
   environment             = var.environment
   service                 = "backend-document-api"
   ssl_certificate_arn     = data.aws_acm_certificate.cert.arn
-  subnet_ids              = values(local.routing_subnet_ids)
+  subnet_ids              = local.backend_lb_subnet_ids
   vpc_id                  = data.aws_vpc.vpc.id
   route53_aliases         = var.backend_route53_aliases
   route53_domain_name     = var.route53_domain_name
 
   create_security_group   = true
-  internal                = true
-  ingress_cidrs           = local.ingress_cidrs_private
+  internal                = var.backend_document_api_create_internal_alb
+  ingress_cidrs           = local.ingress_cidrs_public
   ingress_prefix_list_ids = local.ingress_prefix_list_ids
   service_configuration = {
     listener_config = {

@@ -6,3 +6,4 @@ route53_domain_name = "aws.chdev.org"
 frontend_route53_aliases = ["frontend-document-api"]
 backend_route53_aliases  = ["backend-document-api"]
 frontend_document_api_create_internal_alb = true
+backend_document_api_create_internal_alb  = true

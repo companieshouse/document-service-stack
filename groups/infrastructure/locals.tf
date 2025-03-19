@@ -17,7 +17,8 @@ locals {
                                         data.aws_subnet.routing_subnets.*.id
                                     )
 
-  public_subnet_ids              = data.aws_subnets.public.ids
+  public_subnet_ids               = data.aws_subnets.public.ids
+
   management_private_subnet_cidrs = [for subnet in data.aws_subnet.management : subnet.cidr_block]
   application_cidrs               = [for subnet in data.aws_subnet.private : subnet.cidr_block]
   ingress_cidrs_private           = concat(local.management_private_subnet_cidrs, local.application_cidrs)
@@ -25,4 +26,6 @@ locals {
 
   ingress_prefix_list_ids         = [data.aws_ec2_managed_prefix_list.admin.id]
 
+  frontend_lb_subnet_ids          = var.frontend_document_api_create_internal_alb ? values(local.routing_subnet_ids) : local.public_subnet_ids
+  backend_lb_subnet_ids           = var.backend_document_api_create_internal_alb  ? values(local.routing_subnet_ids) : local.public_subnet_ids
 }
