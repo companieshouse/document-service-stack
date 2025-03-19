@@ -2,5 +2,5 @@ environment = "staging"
 aws_profile = "staging-eu-west-2"
 enable_container_insights = true
 cert_domain = "*.companieshouse.gov.uk"
-frontend_document_api_create_internal_alb = false
-backend_document_api_create_internal_alb  = false
+frontend_document_api_create_internal_alb = true
+backend_document_api_create_internal_alb  = true
