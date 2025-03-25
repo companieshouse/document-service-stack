@@ -22,7 +22,7 @@ module "frontend_document_api_alb" {
   count                     = var.frontend_document_api_create_alb ? 1 : 0
 
   environment               = var.environment
-  service                   = "frontend-document-api"
+  service                   = local.frontend_lb_name
   ssl_certificate_arn       = data.aws_acm_certificate.cert.arn
   subnet_ids                = local.frontend_lb_subnet_ids
   vpc_id                    = data.aws_vpc.vpc.id
@@ -53,7 +53,7 @@ module "backend_document_api_alb" {
   count                   = var.backend_document_api_create_alb ? 1 : 0
 
   environment             = var.environment
-  service                 = "backend-document-api"
+  service                 = local.backend_lb_name
   ssl_certificate_arn     = data.aws_acm_certificate.cert.arn
   subnet_ids              = local.backend_lb_subnet_ids
   vpc_id                  = data.aws_vpc.vpc.id

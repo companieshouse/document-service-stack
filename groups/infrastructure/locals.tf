@@ -25,7 +25,8 @@ locals {
   ingress_cidrs_public            = concat(local.management_private_subnet_cidrs, local.application_cidrs, [ "0.0.0.0/0" ] )
 
   ingress_prefix_list_ids         = [data.aws_ec2_managed_prefix_list.admin.id]
-
+  frontend_lb_name                = var.frontend_lb_name
+  backend_lb_name                 = var.backend_lb_name
   frontend_lb_subnet_ids          = var.frontend_document_api_create_internal_alb ? values(local.routing_subnet_ids) : local.public_subnet_ids
   backend_lb_subnet_ids           = var.backend_document_api_create_internal_alb  ? values(local.routing_subnet_ids) : local.public_subnet_ids
 }
