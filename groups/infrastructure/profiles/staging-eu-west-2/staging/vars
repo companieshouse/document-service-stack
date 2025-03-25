@@ -4,3 +4,5 @@ enable_container_insights = true
 cert_domain = "*.companieshouse.gov.uk"
 frontend_document_api_create_internal_alb = true
 backend_document_api_create_internal_alb  = true
+frontend_lb_name = "front-document-api"
+backend_lb_name  = "back-document-api"
