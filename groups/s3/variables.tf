@@ -20,8 +20,3 @@ variable "aws_profile" {
 # Variables
 # ---------------------------
 
-variable "username" {
-  type        = string
-  default     = "cidev"
-  description = "Your username - in lowercase!"
-}

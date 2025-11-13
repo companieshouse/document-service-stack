@@ -21,12 +21,8 @@ provider "aws" {
 # S3 Buckets
 # ---------------------------
 
-# ---------------------------
-# S3 Buckets (modern standard)
-# ---------------------------
-
 resource "aws_s3_bucket" "chips_bucket" {
-  bucket = "document-api-chips-${var.username}"
+  bucket = "document-api-chips-${var.environment}"
 }
 
 resource "aws_s3_bucket_acl" "chips_bucket" {
@@ -51,7 +47,7 @@ resource "aws_s3_bucket_acl" "chips_bucket" {
 # ----------------------------------------
 
 resource "aws_s3_bucket" "document_api_bucket" {
-  bucket = "document-api-images-${var.username}"
+  bucket = "document-api-images-${var.environment}"
 }
 
 
@@ -71,5 +67,3 @@ resource "aws_s3_bucket_acl" "document_api_bucket" {
     }
   }
 }
-
-##################################################################
