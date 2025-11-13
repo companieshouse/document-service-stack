@@ -1,0 +1,153 @@
+{
+  "Description": "Document API storage (S3 and DynamoDB)",
+  "Outputs": {
+    "S3Bucket": {
+      "Value": {
+        "Ref": "DocumentAPIBucket"
+      }
+    },
+    "CHIPSBucket": {
+      "Value": {
+        "Ref": "CHIPSBucket"
+      }
+    },
+    "MetadataTable": {
+      "Value": {
+        "Ref": "DocumentAPIMetadataTable"
+      }
+    },
+    "ResourcesTable": {
+      "Value": {
+        "Ref": "DocumentAPIResourcesTable"
+      }
+    }
+  },
+  "Parameters": {
+    "Username": {
+      "Type": "String",
+      "Default": "cidev",
+      "Description": "Your username - in lowercase!"
+    },
+    "Throughput": {
+      "Type": "Number",
+      "Default": "2",
+      "Description": "Throughput for DynamoDB tables"
+    }
+  },
+  "Resources": {
+    "DocumentAPIBucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "AccessControl": "BucketOwnerFullControl",
+        "BucketName": {
+          "Fn::Join": [
+            "-",
+            [
+              "document-api-images",
+              {
+                "Ref": "Username"
+              }
+            ]
+          ]
+        }
+      }
+    },
+    "CHIPSBucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "AccessControl": "BucketOwnerFullControl",
+        "BucketName": {
+          "Fn::Join": [
+            "-",
+            [
+              "document-api-chips",
+              {
+                "Ref": "Username"
+              }
+            ]
+          ]
+        }
+      }
+    },
+    "DocumentAPIMetadataTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "DocumentID",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "DocumentID",
+            "KeyType": "HASH"
+          }
+        ],
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": {
+            "Ref": "Throughput"
+          },
+          "WriteCapacityUnits": {
+            "Ref": "Throughput"
+          }
+        },
+        "TableName": {
+          "Fn::Join": [
+            "-",
+            [
+              "document-api-metadata",
+              {
+                "Ref": "Username"
+              }
+            ]
+          ]
+        }
+      }
+    },
+    "DocumentAPIResourcesTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "DocumentID",
+            "AttributeType": "S"
+          },
+          {
+            "AttributeName": "ContentType",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "DocumentID",
+            "KeyType": "HASH"
+          },
+          {
+            "AttributeName": "ContentType",
+            "KeyType": "RANGE"
+          }
+        ],
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": {
+            "Ref": "Throughput"
+          },
+          "WriteCapacityUnits": {
+            "Ref": "Throughput"
+          }
+        },
+        "TableName": {
+          "Fn::Join": [
+            "-",
+            [
+              "document-api-resources",
+              {
+                "Ref": "Username"
+              }
+            ]
+          ]
+        }
+      }
+    }
+  }
+}
