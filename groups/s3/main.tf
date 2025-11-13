@@ -25,25 +25,51 @@ provider "aws" {
 # S3 Buckets (modern standard)
 # ---------------------------
 
+resource "aws_s3_bucket" "chips_bucket" {
+  bucket = "document-api-chips-${var.username}"
+}
+
+resource "aws_s3_bucket_acl" "chips_bucket" {
+  bucket     = aws_s3_bucket.chips_bucket.id
+
+  access_control_policy {
+    grant {
+      grantee {
+        id   = data.aws_canonical_user_id.current.id
+        type = "CanonicalUser"
+      }
+      permission = "FULL_CONTROL"
+    }
+
+    owner {
+      id = data.aws_canonical_user_id.current.id
+    }
+  }
+}
+
+
+# ----------------------------------------
+
 resource "aws_s3_bucket" "document_api_bucket" {
   bucket = "document-api-images-${var.username}"
-
-  tags = {
-    Name        = "document-api-images-${var.username}"
-    Environment = var.username
-  }
 }
 
-resource "aws_s3_bucket_ownership_controls" "document_api_bucket" {
-  bucket = aws_s3_bucket.document_api_bucket.id
-
-  rule {
-    object_ownership = "BucketOwnerPreferred"
-  }
-}
 
 resource "aws_s3_bucket_acl" "document_api_bucket" {
-  depends_on = [aws_s3_bucket_ownership_controls.document_api_bucket]
   bucket     = aws_s3_bucket.document_api_bucket.id
-  acl        = "private"
+  access_control_policy {
+    grant {
+      grantee {
+        id   = data.aws_canonical_user_id.current.id
+        type = "CanonicalUser"
+      }
+      permission = "FULL_CONTROL"
+    }
+
+    owner {
+      id = data.aws_canonical_user_id.current.id
+    }
+  }
 }
+
+##################################################################
