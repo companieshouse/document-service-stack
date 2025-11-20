@@ -18,10 +18,6 @@ provider "aws" {
 }
 
 # ---------------------------
-# Dynamodb
-# ---------------------------
-
-# ---------------------------
 # DynamoDB Tables
 # ---------------------------
 
@@ -37,10 +33,6 @@ resource "aws_dynamodb_table" "document_api_metadata_table" {
     type = "S"
   }
 
-  tags = {
-    Name        = "document-api-metadata-${var.environment}"
-    Environment = var.environment
-  }
 }
 
 resource "aws_dynamodb_table" "document_api_resources_table" {
@@ -61,9 +53,5 @@ resource "aws_dynamodb_table" "document_api_resources_table" {
     type = "S"
   }
 
-  tags = {
-    Name        = "document-api-resources-${var.environment}"
-    Environment = var.environment
-  }
 }
 
