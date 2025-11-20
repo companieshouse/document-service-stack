@@ -42,10 +42,13 @@ resource "aws_s3_bucket_acl" "chips_bucket" {
 
 # ----------------------------------------
 
-resource "aws_s3_bucket" "document_api_bucket" {
-  bucket = "document-api-images-${var.environment}"
+locals {
+  domain_suffix = (var.environment == "live" ? ".ch.gov.uk" : "")
 }
 
+resource "aws_s3_bucket" "document_api_bucket" {
+  bucket = "document-api-images-${var.environment}${local.domain_suffix}"
+}
 
 resource "aws_s3_bucket_acl" "document_api_bucket" {
   bucket     = aws_s3_bucket.document_api_bucket.id
