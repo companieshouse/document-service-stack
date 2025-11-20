@@ -15,3 +15,13 @@ variable "aws_profile" {
   type        = string
   description = "The AWS profile to use for deployment."
 }
+
+# ---------------------------
+# Variables
+# ---------------------------
+
+variable "throughput" {
+  type        = number
+  default     = 2
+  description = "Throughput for DynamoDB tables"
+}
