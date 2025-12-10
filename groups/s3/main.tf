@@ -48,11 +48,13 @@ resource "aws_s3_bucket" "document_api_bucket" {
   tags = {
     Environment = var.environment
     Name        = "Document API"
+    StackName   = "document-service-stack"
   }
 
   tags_all = {
     Environment = var.environment
     Name        = "Document API"
+    StackName   = "document-service-stack"
   }
 
 }
