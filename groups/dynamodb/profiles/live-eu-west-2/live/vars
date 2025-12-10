@@ -1,4 +1,4 @@
 environment = "live"
 aws_profile = "live-eu-west-2"
-throughput  = 64
+throughput  = 0
 billing_mode = "PAY_PER_REQUEST"
