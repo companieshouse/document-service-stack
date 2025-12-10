@@ -1,5 +1,5 @@
 environment = "cidev"
 aws_profile = "development-eu-west-2"
 
-chips_bucket_name = "document-api-chips-cidev"
-document_api_bucket = "document-api-images-cidev"
+document_api_chips_bucket   = "document-api-chips-cidev"
+document_api_images_bucket  = "document-api-images-cidev"

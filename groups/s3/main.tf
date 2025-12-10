@@ -18,7 +18,7 @@ provider "aws" {
 # ---------------------------
 
 resource "aws_s3_bucket" "chips_bucket" {
-  bucket = var.chips_bucket_name
+  bucket = var.document_api_chips_bucket
 }
 
 resource "aws_s3_bucket_acl" "chips_bucket" {
@@ -43,7 +43,7 @@ resource "aws_s3_bucket_acl" "chips_bucket" {
 # ----------------------------------------
 
 resource "aws_s3_bucket" "document_api_bucket" {
-  bucket = var.document_api_bucket
+  bucket = var.document_api_images_bucket
 }
 
 resource "aws_s3_bucket_acl" "document_api_bucket" {
