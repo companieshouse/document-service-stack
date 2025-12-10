@@ -48,13 +48,13 @@ resource "aws_s3_bucket" "document_api_bucket" {
   tags = {
     Environment = var.environment
     Name        = "Document API"
-    StackName   = "document-service-stack"
+    StackName   = local.stack_name
   }
 
   tags_all = {
     Environment = var.environment
     Name        = "Document API"
-    StackName   = "document-service-stack"
+    StackName   = local.stack_name
   }
 
 }
@@ -62,41 +62,17 @@ resource "aws_s3_bucket" "document_api_bucket" {
 resource "aws_s3_bucket_acl" "document_api_bucket" {
   bucket     = aws_s3_bucket.document_api_bucket.id
   access_control_policy {
-    grant {
-      grantee {
-        id   = data.aws_canonical_user_id.current.id
-        type = "CanonicalUser"
+    dynamic "grant" {
+      for_each = local.aws_s3_bucket_acl_permissions
+      content {
+        grantee {
+          id   = data.aws_canonical_user_id.current.id
+          type = "CanonicalUser"
+        }
+        permission = grant.value
       }
-      permission = "FULL_CONTROL"
     }
-    grant {
-      grantee {
-        id   = data.aws_canonical_user_id.current.id
-        type = "CanonicalUser"
-      }
-      permission = "READ"
-    }
-    grant {
-      grantee {
-        id   = data.aws_canonical_user_id.current.id
-        type = "CanonicalUser"
-      }
-      permission = "READ_ACP"
-    }
-    grant {
-      grantee {
-        id   = data.aws_canonical_user_id.current.id
-        type = "CanonicalUser"
-      }
-      permission = "WRITE"
-    }
-    grant {
-      grantee {
-        id   = data.aws_canonical_user_id.current.id
-        type = "CanonicalUser"
-      }
-      permission = "WRITE_ACP"
-    }
+
     owner {
       id = data.aws_canonical_user_id.current.id
     }

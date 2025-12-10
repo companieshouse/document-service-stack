@@ -25,3 +25,9 @@ variable "document_api_images_bucket" {
   type        = string
   description = "The S3 bucket for Document API."
 }
+
+variable "aws_s3_bucket_acl_permissions" {
+  type        = list(string)
+  description = "The AWS S3 Bucket ACL permissions list."
+  default     = [ "FULL_CONTROL" ]
+}
