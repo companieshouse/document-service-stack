@@ -1,2 +1,5 @@
 environment = "staging"
 aws_profile = "staging-eu-west-2"
+
+document_api_chips_bucket   = "ch-document-api-chips-staging"
+document_api_images_bucket  = "ch-document-api-images-staging"

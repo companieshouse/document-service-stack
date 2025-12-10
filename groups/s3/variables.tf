@@ -15,3 +15,13 @@ variable "aws_profile" {
   type        = string
   description = "The AWS profile to use for deployment."
 }
+
+variable "document_api_chips_bucket" {
+  type        = string
+  description = "The S3 bucket for CHIPS."
+}
+
+variable "document_api_images_bucket" {
+  type        = string
+  description = "The S3 bucket for Document API."
+}
