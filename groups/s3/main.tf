@@ -44,6 +44,17 @@ resource "aws_s3_bucket_acl" "chips_bucket" {
 
 resource "aws_s3_bucket" "document_api_bucket" {
   bucket = var.document_api_images_bucket
+
+  tags = {
+    Environment = var.environment
+    Name        = "Document API"
+  }
+
+  tags_all = {
+    Environment = var.environment
+    Name        = "Document API"
+  }
+
 }
 
 resource "aws_s3_bucket_acl" "document_api_bucket" {
@@ -56,7 +67,34 @@ resource "aws_s3_bucket_acl" "document_api_bucket" {
       }
       permission = "FULL_CONTROL"
     }
-
+    grant {
+      grantee {
+        id   = data.aws_canonical_user_id.current.id
+        type = "CanonicalUser"
+      }
+      permission = "READ"
+    }
+    grant {
+      grantee {
+        id   = data.aws_canonical_user_id.current.id
+        type = "CanonicalUser"
+      }
+      permission = "READ_ACP"
+    }
+    grant {
+      grantee {
+        id   = data.aws_canonical_user_id.current.id
+        type = "CanonicalUser"
+      }
+      permission = "WRITE"
+    }
+    grant {
+      grantee {
+        id   = data.aws_canonical_user_id.current.id
+        type = "CanonicalUser"
+      }
+      permission = "WRITE_ACP"
+    }
     owner {
       id = data.aws_canonical_user_id.current.id
     }
