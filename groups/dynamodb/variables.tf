@@ -25,3 +25,8 @@ variable "throughput" {
   default     = 2
   description = "Throughput for DynamoDB tables"
 }
+
+variable "billing_mode" {
+  type        = string
+  description = "The billing mode for the environment."
+}

@@ -19,7 +19,7 @@ provider "aws" {
 
 resource "aws_dynamodb_table" "document_api_metadata_table" {
   name           = "document-api-metadata-${var.environment}"
-  billing_mode   = "PROVISIONED"
+  billing_mode   = var.billing_mode
   read_capacity  = var.throughput
   write_capacity = var.throughput
   hash_key       = "DocumentID"
@@ -33,7 +33,7 @@ resource "aws_dynamodb_table" "document_api_metadata_table" {
 
 resource "aws_dynamodb_table" "document_api_resources_table" {
   name           = "document-api-resources-${var.environment}"
-  billing_mode   = "PROVISIONED"
+  billing_mode   = var.billing_mode
   read_capacity  = var.throughput
   write_capacity = var.throughput
   hash_key       = "DocumentID"
