@@ -1,3 +1,4 @@
 environment = "cidev"
 aws_profile = "development-eu-west-2"
 throughput  = 2
+billing_mode = "PROVISIONED"
