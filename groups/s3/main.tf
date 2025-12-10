@@ -18,7 +18,7 @@ provider "aws" {
 # ---------------------------
 
 resource "aws_s3_bucket" "chips_bucket" {
-  bucket = "document-api-chips-${var.environment}"
+  bucket = var.chips_bucket_name
 }
 
 resource "aws_s3_bucket_acl" "chips_bucket" {
@@ -42,12 +42,8 @@ resource "aws_s3_bucket_acl" "chips_bucket" {
 
 # ----------------------------------------
 
-locals {
-  domain_suffix = (var.environment == "live" ? ".ch.gov.uk" : "")
-}
-
 resource "aws_s3_bucket" "document_api_bucket" {
-  bucket = "document-api-images-${var.environment}${local.domain_suffix}"
+  bucket = var.document_api_bucket
 }
 
 resource "aws_s3_bucket_acl" "document_api_bucket" {

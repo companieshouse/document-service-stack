@@ -1,2 +1,5 @@
 environment = "live"
 aws_profile = "live-eu-west-2"
+
+chips_bucket_name = "ch-document-api-chips-live"
+document_api_bucket = "ch-document-api-images-live.ch.gov.uk"
