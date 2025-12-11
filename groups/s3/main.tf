@@ -44,17 +44,33 @@ resource "aws_s3_bucket_acl" "chips_bucket" {
 
 resource "aws_s3_bucket" "document_api_bucket" {
   bucket = var.document_api_images_bucket
+
+  tags = {
+    Environment = var.environment
+    StackName   = local.stack_name
+    Name        = local.service_name
+  }
+
+  tags_all = {
+    Environment = var.environment
+    StackName   = local.stack_name
+    Name        = local.service_name
+  }
+
 }
 
 resource "aws_s3_bucket_acl" "document_api_bucket" {
   bucket     = aws_s3_bucket.document_api_bucket.id
   access_control_policy {
-    grant {
-      grantee {
-        id   = data.aws_canonical_user_id.current.id
-        type = "CanonicalUser"
+    dynamic "grant" {
+      for_each = local.aws_s3_bucket_acl_permissions
+      content {
+        grantee {
+          id   = data.aws_canonical_user_id.current.id
+          type = "CanonicalUser"
+        }
+        permission = grant.value
       }
-      permission = "FULL_CONTROL"
     }
 
     owner {
