@@ -44,7 +44,7 @@ resource "aws_s3_bucket_acl" "chips_bucket" {
 
 resource "aws_s3_bucket" "document_api_bucket" {
   bucket = var.document_api_images_bucket
-
+  force_destroy = false
   tags = {
     Environment = var.environment
     StackName   = local.stack_name
@@ -82,7 +82,7 @@ resource "aws_s3_bucket_acl" "document_api_bucket" {
 resource "aws_s3_bucket_lifecycle_configuration" "chips_bucket" {
   count  = var.create_aws_s3_bucket_lifecycle_configuration ? 1 : 0
   bucket = aws_s3_bucket.chips_bucket.id
-
+  transition_default_minimum_object_size = "all_storage_classes_128K"
   rule {
     id = "Delete_Tiff_Images"
 
