@@ -79,7 +79,7 @@ resource "aws_s3_bucket_acl" "document_api_bucket" {
   }
 }
 
-resource "aws_s3_bucket_lifecycle_configuration" "document_api_bucket" {
+resource "aws_s3_bucket_lifecycle_configuration" "chips_bucket" {
   count  = local.create_aws_s3_bucket_lifecycle_configuration ? 1 : 0
   bucket = aws_s3_bucket.chips_bucket.id
 
