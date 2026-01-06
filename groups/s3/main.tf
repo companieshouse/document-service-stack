@@ -63,7 +63,7 @@ resource "aws_s3_bucket_acl" "document_api_bucket" {
   bucket     = aws_s3_bucket.document_api_bucket.id
   access_control_policy {
     dynamic "grant" {
-      for_each = local.aws_s3_bucket_acl_permissions
+      for_each = var.aws_s3_bucket_acl_permissions
       content {
         grantee {
           id   = data.aws_canonical_user_id.current.id
@@ -80,7 +80,7 @@ resource "aws_s3_bucket_acl" "document_api_bucket" {
 }
 
 resource "aws_s3_bucket_lifecycle_configuration" "chips_bucket" {
-  count  = local.create_aws_s3_bucket_lifecycle_configuration ? 1 : 0
+  count  = var.create_aws_s3_bucket_lifecycle_configuration ? 1 : 0
   bucket = aws_s3_bucket.chips_bucket.id
 
   rule {

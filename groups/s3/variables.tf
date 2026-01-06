@@ -31,3 +31,10 @@ variable "aws_s3_bucket_acl_permissions" {
   description = "The AWS S3 Bucket ACL permissions list."
   default     = [ "FULL_CONTROL" ]
 }
+
+variable "create_aws_s3_bucket_lifecycle_configuration" {
+  type        = bool
+  description = "Whether to create the S3 bucket life cycle configuration."
+  default     = false
+}
+
