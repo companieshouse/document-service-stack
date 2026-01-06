@@ -48,13 +48,13 @@ resource "aws_s3_bucket" "document_api_bucket" {
   tags = {
     Environment = var.environment
     StackName   = local.stack_name
-    Name        = local.service_name
+    Service     = local.service_name
   }
 
   tags_all = {
     Environment = var.environment
     StackName   = local.stack_name
-    Name        = local.service_name
+    Service     = local.service_name
   }
 
 }
