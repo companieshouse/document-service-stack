@@ -90,6 +90,8 @@ resource "aws_s3_bucket_lifecycle_configuration" "chips_bucket" {
       days = 50
     }
 
+    filter {}
+
     noncurrent_version_expiration {
       noncurrent_days = 50
     }
