@@ -78,3 +78,22 @@ resource "aws_s3_bucket_acl" "document_api_bucket" {
     }
   }
 }
+
+resource "aws_s3_bucket_lifecycle_configuration" "document_api_bucket" {
+  count  = local.create_aws_s3_bucket_lifecycle_configuration ? 1 : 0
+  bucket = aws_s3_bucket.chips_bucket.id
+
+  rule {
+    id = "Delete_Tiff_Images"
+
+    expiration {
+      days = 50
+    }
+
+    noncurrent_version_expiration {
+      noncurrent_days = 50
+    }
+
+    status = "Enabled"
+  }
+}
